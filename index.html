@@ -1,3 +1,172 @@
-<div class="composer">
-  <textarea placeholder="Écris un message à NeuGPT…"></textarea>
-</div>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="NeuGPT — un espace de conversation simple et moderne.">
+  <title>NeuGPT — Votre espace de conversation</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app">
+
+    <!-- Barre latérale -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <a class="brand" href="#" aria-label="NeuGPT, accueil">
+          <span class="brand-icon">N</span>
+          <span>NeuGPT</span>
+        </a>
+
+        <button class="icon-button sidebar-close" id="closeSidebar"
+          aria-label="Fermer le menu" title="Fermer le menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m6 6 12 12M18 6 6 18"/>
+          </svg>
+        </button>
+      </div>
+
+      <button class="new-chat" id="newChat">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 5v14M5 12h14"/>
+        </svg>
+        <span>Nouvelle conversation</span>
+        <span class="shortcut">+</span>
+      </button>
+
+      <div class="sidebar-label">ESPACE PERSONNEL</div>
+
+      <div class="conversation-list" id="conversationList">
+        <button class="conversation-item active" id="currentConversation">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l1.8-3.6A7.5 7.5 0 1 1 20 11.5Z"/>
+          </svg>
+          <span>Nouvelle conversation</span>
+        </button>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="profile">
+          <div class="avatar">N</div>
+          <div class="profile-info">
+            <strong>NeuGPT</strong>
+            <span>Version 0.1 · Prototype</span>
+          </div>
+          <span class="status-dot" title="Interface disponible"></span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Zone principale -->
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-button menu-button" id="openSidebar"
+          aria-label="Ouvrir le menu" title="Ouvrir le menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+
+        <div class="topbar-title">
+          <span>NeuGPT</span>
+          <span class="version-tag">Bêta</span>
+        </div>
+
+        <button class="icon-button" id="clearChat"
+          aria-label="Effacer la conversation"
+          title="Effacer la conversation">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>
+          </svg>
+        </button>
+      </header>
+
+      <section class="chat-area" id="chatArea">
+        <div class="welcome" id="welcome">
+          <div class="welcome-logo">N</div>
+
+          <p class="eyebrow">BIENVENUE SUR NEUGPT</p>
+
+          <h1>On commence<br>par quoi ?</h1>
+
+          <p class="welcome-description">
+            Un espace pour échanger, explorer des idées
+            et découvrir de nouvelles possibilités.
+          </p>
+
+          <div class="suggestions">
+            <button class="suggestion" data-prompt="Aide-moi à trouver une idée originale.">
+              <span class="suggestion-icon lavender">✳</span>
+              <span>
+                <strong>Imaginer</strong>
+                <small>Trouver de nouvelles idées</small>
+              </span>
+              <span class="suggestion-arrow">↗</span>
+            </button>
+
+            <button class="suggestion" data-prompt="Explique-moi un sujet compliqué simplement.">
+              <span class="suggestion-icon blue">⌘</span>
+              <span>
+                <strong>Comprendre</strong>
+                <small>Découvrir et apprendre</small>
+              </span>
+              <span class="suggestion-arrow">↗</span>
+            </button>
+
+            <button class="suggestion" data-prompt="Aide-moi à écrire un texte.">
+              <span class="suggestion-icon peach">✎</span>
+              <span>
+                <strong>Créer</strong>
+                <small>Écrire et construire un projet</small>
+              </span>
+              <span class="suggestion-arrow">↗</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="messages" id="messages" aria-live="polite"></div>
+      </section>
+
+      <footer class="composer-area">
+        <form class="composer" id="chatForm">
+          <textarea
+            id="messageInput"
+            name="message"
+            rows="1"
+            maxlength="8000"
+            placeholder="Écris un message à NeuGPT…"
+            aria-label="Écrire un message"
+            required
+          ></textarea>
+
+          <div class="composer-bottom">
+            <span class="composer-hint">
+              <span class="hint-dot"></span>
+              Prototype local
+            </span>
+
+            <button class="send-button" id="sendButton"
+              type="submit" aria-label="Envoyer le message"
+              title="Envoyer le message">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 19V5M5 12l7-7 7 7"/>
+              </svg>
+            </button>
+          </div>
+        </form>
+
+        <p class="disclaimer">
+          NeuGPT v0.1 · L’interface de demain se construit aujourd’hui.
+        </p>
+      </footer>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

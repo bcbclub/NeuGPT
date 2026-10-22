@@ -1,0 +1,32 @@
+.composer {
+  width: 100%;
+  max-width: 700px;
+  padding: 14px;
+  background: #ffffff;
+  border: 1px solid #dedee5;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px #00000008;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.composer:focus-within {
+  border-color: #8174e8;
+  box-shadow: 0 0 0 3px #8174e820;
+}
+
+.composer textarea {
+  display: block;
+  width: 100%;
+  min-height: 70px;
+  padding: 4px;
+  border: none;
+  outline: none;
+  resize: vertical;
+  font: 16px/1.5 Arial, sans-serif;
+  color: #202020;
+  background: transparent;
+}
+
+.composer textarea::placeholder {
+  color: #9999a3;
+}
